@@ -1,0 +1,185 @@
+ <!DOCTYPE html>
+<html lang="zh">
+<head>
+    <!-- 哈哈哈明信片拿到没，小小皮一下啦，其实真正想对你说的在下面-->
+    <!-- 【秋晨爱你哦~】by Qiuchen on our 100th Day-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Love between Us</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+</head>
+
+<body>
+    <audio id="bg-music" src="./music2.mp3" preload="auto" autoplay="true" loop="loop"></audio>
+    <div id="back">
+        <div class="mask"></div>
+        <div id="carousel"  class="carousel slide carousel-fade carousel-position">
+            <div class="carousel-inner" style="width: 100%;height: 100%;" id="background">
+                <div class="item active" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background:url(./img/pre.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/0.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/1.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/2.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/3.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/4.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/5.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/6.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/7.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/8.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/9.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img2/10.jpg);background-size: cover;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal show" style="top:24%;">
+        <div class="modal-dialog" style="opacity: .85">
+            <div class="modal-content" style="opacity:.6">
+                <div class="modal-header">
+                    <h1 class="text-center" style="color: #A94442;font-family: 'JournalRegular', Arial, sans-serif;font-size: 5rem;">Since We Fell In LOVE</h1>
+                    <p class="text-center small-title" style="font-size: 2rem">秋晨 & 晶</p>
+                </div>
+                <div class="modal-body text-center" style="line-height: 1.5rem;font-family: 'JournalRegular', Arial, sans-serif;font-size: 3rem;">
+                    <p>
+                        <span id="day" class="time-font"></span><span style="color:#A94442">/&nbsp;</span><span id="hour" class="time-font"></span><span style="color:#A94442">/&nbsp;</span><span id="minute" class="time-font"></span><span style="color:#A94442">/&nbsp;</span><span id="second" class="time-font"></span>
+                    </p>
+                    <p>
+                        days/hours/min/sec
+                    </p>
+                    <p class="text-center" style="color:#A94442;font-size: 17px;font-family: 'FZShuTi', Arial, sans-seri;line-height: 2rem;" id="date_loc"></p>
+                    <p class="text-center" style="color:#A94442;font-size: 17px;font-family: 'FZShuTi', Arial, sans-seri;line-height: 2rem;" id="say"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/count-time.js"></script>
+    <script>
+    $(function() {
+        // session控制音乐  
+        //音乐自动播放
+        $(document).ready(function(){
+            autoPlayMusic();
+            audioAutoPlay();
+        });
+        function audioAutoPlay() {
+            var audio = document.getElementById('bg-music');
+            audio.play();
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                audio.play();
+            }, false);
+        }
+        // 音乐播放
+        function autoPlayMusic() {
+            // 自动播放音乐效果，解决浏览器或者APP自动播放问题
+            function musicInBrowserHandler() {
+                musicPlay(true);
+                document.body.removeEventListener('touchstart', musicInBrowserHandler);
+            }
+            document.body.addEventListener('touchstart', musicInBrowserHandler);
+            // 自动播放音乐效果，解决微信自动播放问题
+            function musicInWeixinHandler() {
+                musicPlay(true);
+                document.addEventListener("WeixinJSBridgeReady", function () {
+                    musicPlay(true);
+                }, false);
+                document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+            }
+            document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+        }
+        function musicPlay(isPlay) {
+            var media = document.querySelector('#bg-music');
+            if (isPlay && media.paused) {
+                media.play();
+            }
+            if (!isPlay && !media.paused) {
+                media.pause();
+            }
+        }
+
+        //设置起始日期
+        countTime('2018/02/22 10:41', 'day', 'hour', 'minute', 'second');
+        var days = $('#day').text();
+
+        // 设置标题
+        $(document).attr("title", "我们的第" + days + "天");
+
+        //设置每一张图片对应的文字
+        var date_locs = new Array(
+            "❤juju情侣的❤",
+            "Day 384-超show理发店",
+            "Day 386-浦东机场",
+            "Day 389-学院二楼实验室",
+            "Day 394-济海旁",
+            "Day 400-佘山",
+            "Day 402-曹安公路",
+            "Day 409-嘉定中心医院",
+            "Day 424-中山公园",
+            "Day 426-乒乓球馆",
+            "Day 427-幕画电影院",
+            "Day 433-嘉实广场",
+        );
+        var says = new Array(
+            "第二年",
+            "做了美美的头发秒变小脸晶",
+            "为了200补助做了一天问卷,没收入的日子好艰难",
+            "表情包亲亲mua",
+            "风和日丽的下午就想和你走一走",
+            "佘山就是个小山头十分钟就登上去了",
+            "特意开车去买糖炒栗子，发现没了不开心不开心",
+            "宝宝眼睛肿了好担心，结果到医院自己好了[笑cry]",
+            "陪赵悦和阿姨吃饭，提前演练见婆婆",
+            "为了毕业照片墙来摆拍",
+            "来看紫薯精",
+            "男票终于从家回来啦！",
+        );
+
+        var start = function() {
+            var index = 0;
+            var index2 = 0;
+            var rate = 10000;
+            $('#say').text(says[(index++) % says.length]);
+            $('#date_loc').text(date_locs[(index2++) % date_locs.length]);
+         	var _play = function () {
+         		$('#say').hide();
+                $('#say').text(says[(index++) % says.length]);
+                $('#say').fadeToggle();
+                $('#date_loc').hide();
+                $('#date_loc').text(date_locs[(index2++) % date_locs.length]);
+                $('#date_loc').fadeToggle();
+                $('#carousel').carousel('next');
+
+         	};
+            setInterval(_play, rate);
+
+        }();
+
+    });
+    </script>
+</body>
+
+</html>
