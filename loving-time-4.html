@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <!-- 哈哈哈明信片拿到没，小小皮一下啦，其实真正想对你说的在下面-->
+    <!-- 【秋晨爱你哦~】by Qiuchen on our 100th Day-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Love between Us</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+</head>
+
+<body>
+    <audio id="bg-music" src="./music4.mp3" preload="auto" autoplay="true" loop="loop"></audio>
+    <div id="back">
+        <div class="mask"></div>
+        <div id="carousel"  class="carousel slide carousel-fade carousel-position">
+            <div class="carousel-inner" style="width: 100%;height: 100%;" id="background">
+                <div class="item active" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%; background:url(./img4/pre.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img4/0.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img4/1.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img4/2.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img4/3.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img4/4.jpg);background-size: cover;"></div>
+                </div>
+                <div class="item" style="width: 100%;height: 100%;">
+                    <div style="width: 100%;height: 100%;background-image: url(./img4/5.jpg);background-size: cover;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal show" style="top:24%;">
+        <div class="modal-dialog" style="opacity: .85">
+            <div class="modal-content" style="opacity:.6">
+                <div class="modal-header">
+                    <h1 class="text-center" style="color: #A94442;font-family: 'JournalRegular', Arial, sans-serif;font-size: 5rem;">Since We Fell In LOVE</h1>
+                    <p class="text-center small-title" style="font-size: 2rem">秋晨 & 晶</p>
+                </div>
+                <div class="modal-body text-center" style="line-height: 1.5rem;font-family: 'JournalRegular', Arial, sans-serif;font-size: 3rem;">
+                    <p>
+                        <span id="day" class="time-font"></span><span style="color:#A94442">/&nbsp;</span><span id="hour" class="time-font"></span><span style="color:#A94442">/&nbsp;</span><span id="minute" class="time-font"></span><span style="color:#A94442">/&nbsp;</span><span id="second" class="time-font"></span>
+                    </p>
+                    <p>
+                        days/hours/min/sec
+                    </p>
+                    <p class="text-center" style="color:#A94442;font-size: 17px;font-family: 'FZShuTi', Arial, sans-seri;line-height: 2rem;" id="date_loc"></p>
+                    <p class="text-center" style="color:#A94442;font-size: 17px;font-family: 'FZShuTi', Arial, sans-seri;line-height: 2rem;" id="say"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/count-time.js"></script>
+    <script>
+    $(function() {
+        // session控制音乐  
+        //音乐自动播放
+        $(document).ready(function(){
+            autoPlayMusic();
+            audioAutoPlay();
+        });
+        function audioAutoPlay() {
+            var audio = document.getElementById('bg-music');
+            audio.play();
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                audio.play();
+            }, false);
+        }
+        // 音乐播放
+        function autoPlayMusic() {
+            // 自动播放音乐效果，解决浏览器或者APP自动播放问题
+            function musicInBrowserHandler() {
+                musicPlay(true);
+                document.body.removeEventListener('touchstart', musicInBrowserHandler);
+            }
+            document.body.addEventListener('touchstart', musicInBrowserHandler);
+            // 自动播放音乐效果，解决微信自动播放问题
+            function musicInWeixinHandler() {
+                musicPlay(true);
+                document.addEventListener("WeixinJSBridgeReady", function () {
+                    musicPlay(true);
+                }, false);
+                document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+            }
+            document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+        }
+        function musicPlay(isPlay) {
+            var media = document.querySelector('#bg-music');
+            if (isPlay && media.paused) {
+                media.play();
+            }
+            if (!isPlay && !media.paused) {
+                media.pause();
+            }
+        }
+
+        //设置起始日期
+        countTime('2018/02/21 21:41', 'day', 'hour', 'minute', 'second');
+        var days = $('#day').text();
+
+        // 设置标题
+        $(document).attr("title", "我们的第" + days + "天");
+
+        //设置每一张图片对应的文字
+        var date_locs = new Array(
+            "❤juju情侣的第四年❤",
+            "Day 1096-海马体照相馆",
+            "Day 1102-天津爱琴海广场",
+            "Day 1110-吉祥花园小阳台",
+            "Day 1111-首都国际机场",
+            "Day 1117-juju的美美自拍",
+            "Day 1129-高级理发店"
+        );
+        var says = new Array(
+            "您这边看",
+            "白嫩晨的白嫩微笑",
+            "再来天津轻车熟路，母校万达一日游",
+            "jo宝心心念的jo爸炒饭",
+            "深圳北京Day0, 下个小目标是胜利会师！",
+            "疲惫的jo爸瞬间精神了",
+            "1400的头发，两个tony老师的高级体验"
+        );
+
+        var start = function() {
+            var index = 0;
+            var index2 = 0;
+            var rate = 5000;
+            $('#say').text(says[(index++) % says.length]);
+            $('#date_loc').text(date_locs[(index2++) % date_locs.length]);
+         	var _play = function () {
+         		$('#say').hide();
+                $('#say').text(says[(index++) % says.length]);
+                $('#say').fadeToggle();
+                $('#date_loc').hide();
+                $('#date_loc').text(date_locs[(index2++) % date_locs.length]);
+                $('#date_loc').fadeToggle();
+                $('#carousel').carousel('next');
+
+         	};
+            setInterval(_play, rate);
+
+        }();
+
+    });
+    </script>
+</body>
+
+</html>
